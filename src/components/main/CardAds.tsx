@@ -9,6 +9,7 @@ interface adsDataType {
 	imgLogo: string;
 	like: boolean;
 	numberOfPhotos: number;
+	group: string;
 	title: string;
 	price: number;
 	city: string;
@@ -77,6 +78,9 @@ const CardAds = (props: adsDataType) => {
 					.replace(/\//g, "-")}`}
 			>
 				<div className="flex flex-col card-body gap-4">
+					<Link href="/" className="btn btn-sm w-fit btn-outline">
+						{props.group}
+					</Link>
 					<p>{truncatedText}</p>
 					<p className="text-sm flex items-center">
 						{props.price}

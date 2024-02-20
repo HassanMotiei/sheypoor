@@ -105,13 +105,15 @@ const ModalAds = () => {
 						</Link>
 						{selectedData &&
 							selectedData.title &&
-							selectedData.title.map((title, index) => (
+							selectedData.title.map((data, index) => (
 								<Link
-									href="/"
+									href={`/adsTitle/${data
+										.replace(/\s/g, "-")
+										.replace(/\//g, "-")}`}
 									key={index}
 									className="border-b py-5 text-xl"
 								>
-									{title}
+									{data}
 								</Link>
 							))}
 					</div>

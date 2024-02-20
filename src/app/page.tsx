@@ -3,9 +3,9 @@ import NewAds from "@/components/main/NewAds";
 
 export default function Home() {
   return (
-    <main >
-      <Header/>
-      <NewAds/>
-    </main>
+		<main>
+			<Header />
+			<NewAds />
+		</main>
   );
 }

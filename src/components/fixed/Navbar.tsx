@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
 
+import { signOut, useSession } from "next-auth/react";
+
 import { FaHeart } from "react-icons/fa";
 import { AiFillMessage } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
@@ -9,6 +11,9 @@ import Link from "next/link";
 import Image from "next/image";
 
 const Navbar = () => {
+	const { data: session } = useSession();
+	const user = session?.user;
+
 	const [theme, setTheme] = React.useState("light");
 
 	React.useEffect(() => {
@@ -39,7 +44,7 @@ const Navbar = () => {
 						<input
 							type="text"
 							placeholder="Search"
-							className="input input-bordered w-[30rem] h-[3.5rem]"
+							className="input input-bordered w-[25rem] h-[3.5rem]"
 						/>
 					</div>
 				</div>
@@ -55,12 +60,6 @@ const Navbar = () => {
 							<Link href="/">
 								<AiFillMessage />
 								Message
-							</Link>
-						</li>
-						<li className="flex items-center ">
-							<Link href="/">
-								<FaUser />
-								My Account
 							</Link>
 						</li>
 					</ul>
@@ -98,6 +97,55 @@ const Navbar = () => {
 						<FaPlus />
 						Free ad registration
 					</Link>
+				</div>
+				<div className="dropdown dropdown-end ml-3">
+					<div
+						tabIndex={0}
+						role="button"
+						className="btn btn-ghost btn-circle avatar"
+					>
+						<div className="w-12 rounded-full">
+							<img
+								alt="Tailwind CSS Navbar component"
+								src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+							/>
+						</div>
+					</div>
+					<ul
+						tabIndex={0}
+						className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+					>
+						{!user && (
+							<li>
+								<Link href="/auth/signin">SignIn</Link>
+							</li>
+						)}
+						{user && (
+							<>
+								<li>
+									<Link
+										href="/auth/profile"
+										className="justify-between"
+									>
+										Profile
+										<span className="badge">New</span>
+									</Link>
+								</li>
+								<li>
+									<Link href="/">Settings</Link>
+								</li>
+								<li>
+									<a
+										className="cursor-pointer"
+										onClick={() => signOut()}
+										role="button"
+									>
+										Logout
+									</a>
+								</li>
+							</>
+						)}
+					</ul>
 				</div>
 			</div>
 		</div>

@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/fixed/Navbar";
 import Footer from "@/components/fixed/Footer";
 
+import { NextAuthProvider } from "./providers";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -19,9 +21,11 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`${inter.className} mx-20`}>
-				<Navbar />
-				{children}
-				<Footer />
+				<NextAuthProvider>
+					<Navbar />
+					{children}
+					<Footer />
+				</NextAuthProvider>
 			</body>
 		</html>
 	);

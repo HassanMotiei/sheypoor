@@ -27,8 +27,10 @@ export default function Page({ params }: { params: { slug: string } }) {
 			try {
 				const mainAdsData = await adsData.filter(
 					(ads) =>
-						ads.group.replace(/\s/g, "-").replace(/\//g, "-") ===
-						params.slug
+						ads.group
+							.replace(/\s/g, "-")
+							.replace(/\//g, "-")
+							.replace(/,/g, "") === params.slug
 				);
 
 				if (mainAdsData) {

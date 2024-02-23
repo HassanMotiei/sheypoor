@@ -109,7 +109,8 @@ const ModalAds = () => {
 								<Link
 									href={`/adsTitle/${data
 										.replace(/\s/g, "-")
-										.replace(/\//g, "-")}`}
+										.replace(/\//g, "-")
+										.replace(/,/g, "")}`}
 									key={index}
 									className="border-b py-5 text-xl"
 								>

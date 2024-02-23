@@ -5,7 +5,10 @@ import SwiperCarousel from "@/components/main/SwiperCarousel";
 export default async function Page({ params }: { params: { slug: string } }) {
 	let mainAdsData = await adsData.find(
 		(ads) =>
-			ads.title.replace(/\s/g, "-").replace(/\//g, "-") === params.slug
+			ads.title
+				.replace(/\s/g, "-")
+				.replace(/\//g, "-")
+				.replace(/,/g, "") === params.slug
 	);
 
 	// let hasAds = await adsData.some((ads) => ads.id === params.slug);
@@ -14,8 +17,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
 		return (
 			<div className="mt-10">
 				<Breadcrumbs />
-				<SwiperCarousel />
-				{mainAdsData.title}
+				<SwiperCarousel {...mainAdsData} />
+				<div className="mt-16">
+					<p>{mainAdsData.title}</p>
+				</div>
 			</div>
 		);
 	} else {

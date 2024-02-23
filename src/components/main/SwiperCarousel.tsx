@@ -8,9 +8,20 @@ import "swiper/css/navigation";
 import { Autoplay, Navigation } from "swiper/modules";
 
 import CardImageAds from "./CardImageAds";
-import coursesData from "@/app/adsData";
+import { Images } from "lucide-react";
 
-export default function SwiperCarousel() {
+interface adsDataType {
+	id: string;
+	imgAds: string[];
+	imgLogo: string;
+	like: boolean;
+	title: string;
+	price: number;
+	city: string;
+	time: string;
+}
+
+export default function SwiperCarousel(mainAdsData: adsDataType) {
 	return (
 		<>
 			<Swiper
@@ -18,7 +29,7 @@ export default function SwiperCarousel() {
 				slidesPerView={1}
 				spaceBetween={5}
 				autoplay={{
-					delay: 1000,
+					delay: 3000,
 					disableOnInteraction: false,
 				}}
 				breakpoints={{
@@ -38,11 +49,17 @@ export default function SwiperCarousel() {
 				navigation={true}
 				modules={[Autoplay, Navigation]}
 			>
-				{coursesData.map((data) => (
-					<SwiperSlide key={data.id}>
-						<CardImageAds {...data} />
-					</SwiperSlide>
-				))}
+				{mainAdsData &&
+					mainAdsData.imgAds &&
+					mainAdsData.imgAds.map((data, index) => (
+						<SwiperSlide key={index}>
+							<CardImageAds data={data} />
+						</SwiperSlide>
+					))}
+				<p className="flex items-center gap-1 text-l text-black bg-[#00000043] absolute bottom-10 left-10 px-2 py-1 rounded-lg z-10">
+					<Images size={16} />
+					{mainAdsData.imgAds.length}
+				</p>
 			</Swiper>
 		</>
 	);

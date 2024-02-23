@@ -5,7 +5,7 @@ import Image from "next/image";
 
 interface adsDataType {
 	id: string;
-	imgAds: string;
+	imgAds: string[];
 	imgLogo: string;
 	like: boolean;
 	numberOfPhotos: number;
@@ -17,23 +17,32 @@ interface adsDataType {
 }
 
 const CardAds = (props: adsDataType) => {
-	const originalText = props.title;
-	const maxLength = 50;
+	const originalTextTitle = props.title;
+	const originalTextGroup = props.group;
 
-	const truncatedText = _.truncate(originalText, {
-		length: maxLength,
+	const maxLengthTitle = 50;
+	const maxLengthGroup = 20;
+
+	const truncatedTextTitle = _.truncate(originalTextTitle, {
+		length: maxLengthTitle,
 		separator: " ",
 	});
+	const truncatedTextGroup = _.truncate(originalTextGroup, {
+		length: maxLengthGroup,
+		separator: " ",
+	});
+
 	return (
 		<div className="card card-compact w-[13rem] bg-base-100 shadow-xl m-3">
 			<figure>
 				<Link
 					href={`/ads/${props.title
 						.replace(/\s/g, "-")
-						.replace(/\//g, "-")}`}
+						.replace(/\//g, "-")
+						.replace(/,/g, "")}`}
 				>
 					<Image
-						src={props.imgAds}
+						src={props.imgAds[0]}
 						alt="sheypoor-ads"
 						width="210"
 						height="210"
@@ -69,19 +78,26 @@ const CardAds = (props: adsDataType) => {
 			<div className="absolute right-3 top-[10.5rem] rounded-full bg-neutral-content py-0.5 px-1.5 text-black	">
 				<p className="flex items-center gap-1">
 					<Images size={16} />
-					12
+					{props.imgAds.length}
 				</p>
 			</div>
 			<Link
 				href={`/ads/${props.title
 					.replace(/\s/g, "-")
-					.replace(/\//g, "-")}`}
+					.replace(/\//g, "-")
+					.replace(/,/g, "")}`}
 			>
 				<div className="flex flex-col card-body gap-4">
-					<Link href="/" className="btn btn-sm w-fit btn-outline">
-						{props.group}
+					<Link
+						href={`/adsTitle/${props.group
+							.replace(/\s/g, "-")
+							.replace(/\//g, "-")
+							.replace(/,/g, "")}`}
+						className="btn btn-sm w-fit btn-outline"
+					>
+						{truncatedTextGroup}
 					</Link>
-					<p>{truncatedText}</p>
+					<p>{truncatedTextTitle}</p>
 					<p className="text-sm flex items-center">
 						{props.price}
 						<DollarSign size={20} />

@@ -68,7 +68,7 @@ const ModalAds = () => {
 
 	return (
 		<div>
-			<div className="flex justify-evenly items-center mt-8">
+			<div className="flex justify-evenly items-center mt-32">
 				{/* Render buttons for each headerData item */}
 				{headerData.map((data) => (
 					<button

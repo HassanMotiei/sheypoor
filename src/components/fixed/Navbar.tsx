@@ -29,8 +29,8 @@ const Navbar = () => {
 	}, []);
 
 	return (
-		<div className="border-b">
-			<div className="navbar bg-base-100 my-3">
+		<div className="border-b fixed top-0 w-[88.2%] z-50 bg-base-100">
+			<div className="navbar my-3">
 				<div className="flex-1 gap-2">
 					<Link href="/">
 						<Image

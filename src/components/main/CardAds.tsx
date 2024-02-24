@@ -8,7 +8,6 @@ interface adsDataType {
 	imgAds: string[];
 	imgLogo: string;
 	like: boolean;
-	numberOfPhotos: number;
 	group: string;
 	title: string;
 	price: number;

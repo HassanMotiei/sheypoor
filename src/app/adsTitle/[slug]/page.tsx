@@ -2,15 +2,15 @@
 import React, { useState, useEffect } from "react";
 import CardAds from "@/components/main/CardAds";
 import adsData from "@/app/adsData";
+import Breadcrumbs from "@/components/main/Breadcrumbs";
 
 export default function Page({ params }: { params: { slug: string } }) {
 	const [allItems, setAllItems] = useState<
 		| {
 				id: string;
-				imgAds: string;
+				imgAds: string[];
 				imgLogo: string;
 				like: boolean;
-				numberOfPhotos: number;
 				group: string;
 				title: string;
 				price: number;
@@ -52,7 +52,8 @@ export default function Page({ params }: { params: { slug: string } }) {
 	console.log(itemsToShow);
 
 	return (
-		<div className="mt-16">
+		<div className="mt-32">
+			<Breadcrumbs />
 			<div className="flex justify-between flex-wrap mt-5">
 				{itemsToShow.map((data) => (
 					<CardAds key={data.id} {...data} />

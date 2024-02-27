@@ -1,4 +1,5 @@
-import AdRegisterModal from "@/components/main/AdRegisterModal"
+import AdRegisterModal from "@/components/main/AdRegisterModal";
+import AddRegisterInput from "@/components/main/AddRegisterInput";
 
 const page = () => {
 	return (
@@ -11,30 +12,16 @@ const page = () => {
 					<button className="btn text-lg">Clear the form</button>
 				</div>
 			</div>
-			<div className="grid grid-cols-2 gap-10 mt-12 max-w-screen-xl mx-auto">
-				<div className="text-start">
-					<div>
+			<div className="grid grid-cols-2 gap-10 mt-12 max-w-screen-xl">
+				<div className="flex flex-col gap-3 text-start">
+					<div className="block">
 						<AdRegisterModal />
 					</div>
 					<div>
-						<input
-							type="text"
-							placeholder="Type here"
-							className="input input-bordered w-full max-w-xs"
-						/>
-					</div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div>
-						<input
-							type="text"
-							placeholder="Type here"
-							className="input input-bordered w-full max-w-xs"
-						/>
+						<AddRegisterInput />
 					</div>
 				</div>
-				<div className="text-start">b</div>
+				<div className="text-start">d</div>
 			</div>
 		</div>
 	);

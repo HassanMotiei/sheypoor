@@ -2,8 +2,6 @@
 import React from "react";
 
 import headerData from "@/app/headerData";
-import Link from "next/link";
-import { ChevronRight } from "lucide-react";
 
 const AdRegisterModal = () => {
 	const [selectedData, setSelectedData] = React.useState<{
@@ -50,20 +48,24 @@ const AdRegisterModal = () => {
 			modalRef.current.close();
 		}
 		setSelectedSubData(subData);
+		setSelectedData(null);
 	};
-
 
 	return (
 		<div>
 			<button
-				className="flex justify-between items-center"
+				className="btn-block flex flex-col gap-2 border-b pb-2"
 				onClick={() => openModal()} // Pass the data to openModal function
 			>
-				<div className="text-lg mr-[29rem]">Category</div>
-				<div>
-					<ChevronRight />
-				</div>
+				{!selectedSubData && <div className="text-lg mt-6">Category</div>}
+				{selectedSubData && (
+					<div className="flex flex-col gap-1">
+						<div className="text-sm text-start">Category</div>
+						<div className="text-lg">{selectedSubData}</div>
+					</div>
+				)}
 			</button>
+
 			<dialog ref={modalRef} className="modal">
 				<div className="modal-box">
 					<form method="dialog">
@@ -110,6 +112,7 @@ const AdRegisterModal = () => {
 							))}
 						{isShowModalSubList &&
 							selectedData &&
+							selectedData.title &&
 							selectedData.title.map((subData, index) => (
 								<button
 									className="flex flex-col items-center gap-3"
@@ -125,7 +128,6 @@ const AdRegisterModal = () => {
 					<button>close</button>
 				</form>
 			</dialog>
-			{selectedSubData && <p>{selectedSubData}</p>}
 		</div>
 	);
 };

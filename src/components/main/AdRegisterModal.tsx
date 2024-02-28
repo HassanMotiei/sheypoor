@@ -3,7 +3,15 @@ import React from "react";
 
 import headerData from "@/app/headerData";
 
-const AdRegisterModal = () => {
+interface AdRegisterModalProps {
+	selectedSubData: string | null;
+	setSelectedSubData: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+const AdRegisterModal: React.FC<AdRegisterModalProps> = ({
+	selectedSubData,
+	setSelectedSubData,
+}) => {
 	const [selectedData, setSelectedData] = React.useState<{
 		id: number;
 		name: string;
@@ -12,12 +20,9 @@ const AdRegisterModal = () => {
 		title: string[];
 	} | null>(null);
 
-	const [selectedSubData, setSelectedSubData] = React.useState<string | null>(
-		null
-	);
-
 	const [isShowModalList, setIsShowModalList] = React.useState(false);
 	const [isShowModalSubList, setIsShowModalSubList] = React.useState(false);
+	const [colorWarning, setColorWarning] = React.useState("indigo-700");
 
 	const modalRef = React.useRef<HTMLDialogElement>(null);
 
@@ -54,18 +59,30 @@ const AdRegisterModal = () => {
 	return (
 		<div>
 			<button
-				className="btn-block flex flex-col gap-2 border-b pb-2"
+				className="btn-block flex flex-col gap-2 pb-2"
 				onClick={() => openModal()} // Pass the data to openModal function
 			>
-				{!selectedSubData && <div className="text-lg mt-6">Category</div>}
+				{!selectedSubData && <div className="mt-6">Category</div>}
 				{selectedSubData && (
 					<div className="flex flex-col gap-1">
 						<div className="text-sm text-start">Category</div>
-						<div className="text-lg">{selectedSubData}</div>
+						<div>{selectedSubData}</div>
 					</div>
 				)}
 			</button>
-
+			{colorWarning === "indigo-700" ? (
+				<div className="label border-t-indigo-700 border-t pt-2">
+					<span className="label-text-alt text-indigo-700 text-xs">
+						Enter a suitable category for your ad
+					</span>
+				</div>
+			) : (
+				<div className="label border-t-red-700 border-t pt-2">
+					<span className="label-text-alt text-red-700 text-xs">
+						Please complete this section
+					</span>
+				</div>
+			)}
 			<dialog ref={modalRef} className="modal">
 				<div className="modal-box">
 					<form method="dialog">
@@ -133,3 +150,4 @@ const AdRegisterModal = () => {
 };
 
 export default AdRegisterModal;
+

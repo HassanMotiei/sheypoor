@@ -1,11 +1,27 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 
-const AddRegisterInput = () => {
-	const [showButton, setShowButton] = useState(true);
-	const [inputValue, setInputValue] = useState("");
-	const [colorWarning, setColorWarning] = useState("indigo-700");
-	const [inputFocused, setInputFocused] = useState(false);
+interface AddRegisterInputProps {
+	inputValue: string;
+	setInputValue: React.Dispatch<React.SetStateAction<string>>;
+	showButton: boolean;
+	setShowButton: React.Dispatch<React.SetStateAction<boolean>>;
+	colorWarning: string;
+	setColorWarning: React.Dispatch<React.SetStateAction<string>>;
+	inputFocused: boolean;
+	setInputFocused: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const AddRegisterInput: React.FC<AddRegisterInputProps> = ({
+	inputValue,
+	setInputValue,
+	showButton,
+	setShowButton,
+	colorWarning,
+	setColorWarning,
+	inputFocused,
+	setInputFocused,
+}) => {
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	const handleBlur = () => {
@@ -48,7 +64,9 @@ const AddRegisterInput = () => {
 			<label className="form-control w-full max-w-xl">
 				{!showButton && (
 					<div className="label py-0">
-						<span className={`label-text text-${colorWarning}`}>
+						<span
+							className={`label-text text-sm text-${colorWarning}`}
+						>
 							Ad title
 						</span>
 					</div>
@@ -64,15 +82,13 @@ const AddRegisterInput = () => {
 				)}
 				{colorWarning === "indigo-700" ? (
 					<div className="label border-t-indigo-700 border-t pt-2">
-						<span className="label-text-alt text-indigo-700">
+						<span className="label-text-alt text-indigo-700 text-xs">
 							Enter a suitable title for your ad
 						</span>
 					</div>
 				) : (
-					<div
-						className="label border-t-red-700 border-t pt-2"
-					>
-						<span className="label-text-alt text-red-700">
+					<div className="label border-t-red-700 border-t pt-2">
+						<span className="label-text-alt text-red-700 text-xs">
 							Please complete this section
 						</span>
 					</div>

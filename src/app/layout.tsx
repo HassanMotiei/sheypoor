@@ -5,9 +5,9 @@ import Navbar from "@/components/fixed/Navbar";
 import Footer from "@/components/fixed/Footer";
 
 import { NextAuthProvider } from "./providers";
-import { DataProvider } from "@/context/data.context";
+// import { DataProvider } from "@/context/data.context";
 
-import UserList from "@/components/UserList";
+// import UserList from "@/components/UserList";
 // import UserDetail from "@/components/UserDetail";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,13 +26,13 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={`${inter.className} mx-20`}>
 				<NextAuthProvider>
-					<DataProvider>
+					{/* <DataProvider> */}
 						<Navbar />
 						{children}
 						<Footer />
-						<UserList />
+						{/* <UserList /> */}
 						{/* <UserDetail /> */}
-					</DataProvider>
+					{/* </DataProvider> */}
 				</NextAuthProvider>
 			</body>
 		</html>

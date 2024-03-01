@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useData } from "@/context/data.context";
 
 const UserList: React.FC = () => {

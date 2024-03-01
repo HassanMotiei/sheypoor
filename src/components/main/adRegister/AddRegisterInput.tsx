@@ -1,13 +1,13 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 interface AddRegisterInputProps {
 	inputValue: string;
 	setInputValue: React.Dispatch<React.SetStateAction<string>>;
 	showButton: boolean;
 	setShowButton: React.Dispatch<React.SetStateAction<boolean>>;
-	colorWarning: string;
-	setColorWarning: React.Dispatch<React.SetStateAction<string>>;
+	colorWarningInput: string;
+	setColorWarningInput: React.Dispatch<React.SetStateAction<string>>;
 	inputFocused: boolean;
 	setInputFocused: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -17,8 +17,8 @@ const AddRegisterInput: React.FC<AddRegisterInputProps> = ({
 	setInputValue,
 	showButton,
 	setShowButton,
-	colorWarning,
-	setColorWarning,
+	colorWarningInput,
+	setColorWarningInput,
 	inputFocused,
 	setInputFocused,
 }) => {
@@ -27,7 +27,7 @@ const AddRegisterInput: React.FC<AddRegisterInputProps> = ({
 	const handleBlur = () => {
 		if (inputValue.trim() === "") {
 			setShowButton(true);
-			setColorWarning("red-700");
+			setColorWarningInput("red-700");
 		}
 		setInputFocused(false);
 	};
@@ -35,7 +35,7 @@ const AddRegisterInput: React.FC<AddRegisterInputProps> = ({
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setInputValue(e.target.value);
 		if (e.target.value.trim() !== "") {
-			setColorWarning("indigo-700");
+			setColorWarningInput("indigo-700");
 		}
 	};
 
@@ -65,7 +65,7 @@ const AddRegisterInput: React.FC<AddRegisterInputProps> = ({
 				{!showButton && (
 					<div className="label py-0">
 						<span
-							className={`label-text text-sm text-${colorWarning}`}
+							className={`label-text text-sm text-${colorWarningInput}`}
 						>
 							Ad title
 						</span>
@@ -80,7 +80,7 @@ const AddRegisterInput: React.FC<AddRegisterInputProps> = ({
 						onChange={handleChange}
 					/>
 				)}
-				{colorWarning === "indigo-700" ? (
+				{colorWarningInput === "indigo-700" ? (
 					<div className="label border-t-indigo-700 border-t pt-2">
 						<span className="label-text-alt text-indigo-700 text-xs">
 							Enter a suitable title for your ad

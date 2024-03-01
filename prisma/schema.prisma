@@ -7,6 +7,50 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Ads
+model Ads {
+  id        Int      @id @default(autoincrement())
+  imgLogo   String?
+  imgAds    String[]
+  favorite  Boolean?
+  group     String?
+  title     String?
+  price     Int?
+  city      String?
+  time      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// AdsTitle
+model Header {
+  id        Int      @id @default(autoincrement())
+  name   String
+  iconName    String
+  allGroup  String
+  title     String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Example
+model Brand {
+  id       Int       @id @default(autoincrement())
+  name     String
+  products Product[]
+}
+
+model Product {
+  id        Int      @id @default(autoincrement())
+  title     String
+  price     Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  brandId   Int
+  brand     Brand    @relation(fields: [brandId], references: [id])
+}
+
+// Auth
 model User {
   id            String    @id @default(uuid())
   name          String
@@ -23,7 +67,7 @@ model User {
 }
 
 model Account {
-  id                String   @id @default(cuid())
+  id                String   @id @default(uuid())
   userId            String   @map("user_id")
   type              String?
   provider          String
@@ -43,7 +87,7 @@ model Account {
 }
 
 model Session {
-  id           String   @id @default(cuid())
+  id           String   @id @default(uuid())
   userId       String?  @map("user_id")
   sessionToken String   @unique @map("session_token")
   accessToken  String?  @map("access_token")
@@ -56,7 +100,7 @@ model Session {
 }
 
 model VerificationRequest {
-  id         String   @id @default(cuid())
+  id         String   @id @default(uuid())
   identifier String
   token      String   @unique
   expires    DateTime

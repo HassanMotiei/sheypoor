@@ -14,7 +14,7 @@ interface adsDataType {
 	id: string;
 	imgAds: string[];
 	imgLogo: string;
-	like: boolean;
+	favorite: boolean;
 	title: string;
 	price: number;
 	city: string;

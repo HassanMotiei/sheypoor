@@ -34,7 +34,7 @@ const Navbar = () => {
 				<div className="flex-1 gap-2">
 					<Link href="/">
 						<Image
-							src="/images/shypoor-logo.png"
+							src="/images/sheypoor-logo.png"
 							width="60"
 							height="60"
 							alt="sheypoor-logo"
@@ -51,13 +51,13 @@ const Navbar = () => {
 				<div className="flex-none gap-4">
 					<ul className="menu menu-horizontal px-1">
 						<li className="flex items-center ">
-							<Link href="/">
+							<Link href="/favorites">
 								<FaHeart />
-								Save
+								Favorites
 							</Link>
 						</li>
 						<li className="flex items-center ">
-							<Link href="/">
+							<Link href="/message">
 								<AiFillMessage />
 								Message
 							</Link>

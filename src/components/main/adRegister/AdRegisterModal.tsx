@@ -1,18 +1,22 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 
 import headerData from "@/app/headerData";
 
 interface AdRegisterModalProps {
 	selectedSubData: string | null;
 	setSelectedSubData: React.Dispatch<React.SetStateAction<string | null>>;
+	colorWarningModal: string;
+	setColorWarningModal: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const AdRegisterModal: React.FC<AdRegisterModalProps> = ({
 	selectedSubData,
 	setSelectedSubData,
+	colorWarningModal,
+	setColorWarningModal,
 }) => {
-	const [selectedData, setSelectedData] = React.useState<{
+	const [selectedData, setSelectedData] = useState<{
 		id: number;
 		name: string;
 		iconName: string;
@@ -20,17 +24,19 @@ const AdRegisterModal: React.FC<AdRegisterModalProps> = ({
 		title: string[];
 	} | null>(null);
 
-	const [isShowModalList, setIsShowModalList] = React.useState(false);
-	const [isShowModalSubList, setIsShowModalSubList] = React.useState(false);
-	const [colorWarning, setColorWarning] = React.useState("indigo-700");
-
+	const [isShowModalList, setIsShowModalList] = useState(false);
+	const [isShowModalSubList, setIsShowModalSubList] = useState(false);
 	const modalRef = React.useRef<HTMLDialogElement>(null);
+
+	const [inputValue, setInputValue] = useState("");
+	const [inputFocused, setInputFocused] = useState(false);
 
 	const openModal = () => {
 		if (modalRef.current) {
 			modalRef.current.showModal();
-		} // Set the selected data when opening the modal
+		}
 		setIsShowModalList(true);
+		setColorWarningModal("indigo-700");
 	};
 
 	const openModalTitle = (data: {
@@ -46,21 +52,34 @@ const AdRegisterModal: React.FC<AdRegisterModalProps> = ({
 		setSelectedData(data);
 		setIsShowModalList(false);
 		setIsShowModalSubList(true);
+		setColorWarningModal("indigo-700");
 	};
 
-	const openModalSubTitle = (subData: string) => {
+	const closeModalSubTitle = (subData: string) => {
 		if (modalRef.current) {
 			modalRef.current.close();
 		}
 		setSelectedSubData(subData);
 		setSelectedData(null);
+		setColorWarningModal("indigo-700");
+	};
+
+	const closeModal = () => {
+		if (modalRef.current) {
+			modalRef.current.close();
+		}
+		if (selectedSubData) {
+			setColorWarningModal("indigo-700");
+		} else {
+			setColorWarningModal("red-700");
+		}
 	};
 
 	return (
 		<div>
 			<button
 				className="btn-block flex flex-col gap-2 pb-2"
-				onClick={() => openModal()} // Pass the data to openModal function
+				onClick={openModal}
 			>
 				{!selectedSubData && <div className="mt-6">Category</div>}
 				{selectedSubData && (
@@ -70,7 +89,7 @@ const AdRegisterModal: React.FC<AdRegisterModalProps> = ({
 					</div>
 				)}
 			</button>
-			{colorWarning === "indigo-700" ? (
+			{colorWarningModal === "indigo-700" ? (
 				<div className="label border-t-indigo-700 border-t pt-2">
 					<span className="label-text-alt text-indigo-700 text-xs">
 						Enter a suitable category for your ad
@@ -86,22 +105,24 @@ const AdRegisterModal: React.FC<AdRegisterModalProps> = ({
 			<dialog ref={modalRef} className="modal">
 				<div className="modal-box">
 					<form method="dialog">
-						<button className="btn btn-sm btn-circle btn-ghost absolute right-4 top-4 text-2xl">
+						<button
+							className="btn btn-sm btn-circle btn-ghost absolute right-4 top-4 text-2xl"
+							onClick={closeModal}
+						>
 							✕
 						</button>
 						<div className="text-2xl font-extrabold">
-							{/* Show the selected data's name */}
 							Select category
 						</div>
-						<button className="modal-backdrop">Close</button>
+						<button className="modal-backdrop" onClick={closeModal}>
+							Close
+						</button>
 					</form>
 					<div className="flex flex-col max-h-96 overflow-y-auto border-t">
-						{/* Render links */}
 						<label className="input input-bordered flex items-center gap-2 mt-5">
 							<input
 								type="text"
 								className="grow"
-								placeholder="Search"
 							/>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -116,13 +137,12 @@ const AdRegisterModal: React.FC<AdRegisterModalProps> = ({
 								/>
 							</svg>
 						</label>
-						{/* Render buttons for each headerData item */}
 						{isShowModalList &&
 							headerData.map((data) => (
 								<button
 									className="flex flex-col items-center gap-3"
 									key={data.id}
-									onClick={() => openModalTitle(data)} // Pass the data to openModal function
+									onClick={() => openModalTitle(data)}
 								>
 									{data.name}
 								</button>
@@ -134,14 +154,18 @@ const AdRegisterModal: React.FC<AdRegisterModalProps> = ({
 								<button
 									className="flex flex-col items-center gap-3"
 									key={index}
-									onClick={() => openModalSubTitle(subData)} // Pass the data to openModal function
+									onClick={() => closeModalSubTitle(subData)}
 								>
 									{subData}
 								</button>
 							))}
 					</div>
 				</div>
-				<form method="dialog" className="modal-backdrop">
+				<form
+					method="dialog"
+					className="modal-backdrop"
+					onClick={closeModal}
+				>
 					<button>close</button>
 				</form>
 			</dialog>
@@ -150,4 +174,3 @@ const AdRegisterModal: React.FC<AdRegisterModalProps> = ({
 };
 
 export default AdRegisterModal;
-

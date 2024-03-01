@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const page = () => {
-  return (
-	<div>
-	  Profile
-	</div>
-  )
-}
+	return <div className="mt-32">Profile</div>;
+};
 
-export default page
+export default page;

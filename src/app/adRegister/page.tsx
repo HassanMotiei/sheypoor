@@ -1,23 +1,25 @@
 "use client";
 import React, { useState } from "react";
-import AdRegisterModal from "@/components/main/AdRegisterModal";
-import AddRegisterInput from "@/components/main/AddRegisterInput";
-import FileInput from "@/components/main/FileInput";
+import AdRegisterModal from "@/components/main/adRegister/AdRegisterModal";
+import AddRegisterInput from "@/components/main/adRegister/AddRegisterInput";
+import FileInput from "@/components/main/adRegister/FileInput";
 
 const AdRegister = () => {
 	const [images, setImages] = useState<string[]>([]);
 	const [selectedSubData, setSelectedSubData] = useState<string | null>(null);
+	const [colorWarningModal, setColorWarningModal] = useState("indigo-700");
 	const [inputValue, setInputValue] = useState("");
 	const [showButton, setShowButton] = useState(true);
-	const [colorWarning, setColorWarning] = useState("indigo-700");
+	const [colorWarningInput, setColorWarningInput] = useState("indigo-700");
 	const [inputFocused, setInputFocused] = useState(false);
 
 	const EmptyCategory = () => {
 		setImages([]);
 		setSelectedSubData(null);
+		setColorWarningModal("indigo-700");
 		setInputValue("");
 		setShowButton(true);
-		setColorWarning("indigo-700");
+		setColorWarningInput("indigo-700");
 		setInputFocused(false);
 	};
 
@@ -39,6 +41,8 @@ const AdRegister = () => {
 						<AdRegisterModal
 							selectedSubData={selectedSubData}
 							setSelectedSubData={setSelectedSubData}
+							colorWarningModal={colorWarningModal}
+							setColorWarningModal={setColorWarningModal}
 						/>
 					</div>
 					<div>
@@ -47,8 +51,8 @@ const AdRegister = () => {
 							setInputValue={setInputValue}
 							showButton={showButton}
 							setShowButton={setShowButton}
-							colorWarning={colorWarning}
-							setColorWarning={setColorWarning}
+							colorWarningInput={colorWarningInput}
+							setColorWarningInput={setColorWarningInput}
 							inputFocused={inputFocused}
 							setInputFocused={setInputFocused}
 						/>

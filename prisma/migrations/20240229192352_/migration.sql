@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Header" ALTER COLUMN "iconName" SET NOT NULL,
+ALTER COLUMN "iconName" SET DATA TYPE TEXT;

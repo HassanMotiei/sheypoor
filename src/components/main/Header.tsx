@@ -13,10 +13,13 @@ import {
 	CarFront,
 } from "lucide-react";
 
-import headerData from "@/app/headerData";
 import Link from "next/link";
 
-const ModalAds = () => {
+interface HeaderProps {
+	header: any[];
+}
+
+const ModalAds = ({ header }: HeaderProps) => {
 	const [selectedData, setSelectedData] = React.useState<{
 		id: number;
 		name: string;
@@ -70,7 +73,7 @@ const ModalAds = () => {
 		<div>
 			<div className="flex justify-evenly items-center mt-32">
 				{/* Render buttons for each headerData item */}
-				{headerData.map((data) => (
+				{header.map((data) => (
 					<button
 						className="flex flex-col items-center gap-3"
 						key={data.id}

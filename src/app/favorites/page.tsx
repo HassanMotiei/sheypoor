@@ -4,7 +4,7 @@ import CardAds from "@/components/main/CardAds";
 import adsData from "@/app/adsData";
 import Breadcrumbs from "@/components/main/Breadcrumbs";
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default function Page() {
 	const [allItems, setAllItems] = useState<
 		| {
 				id: string;
@@ -25,20 +25,13 @@ export default function Page({ params }: { params: { slug: string } }) {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const mainAdsData = await adsData.filter(
-					(ads) =>
-						ads.group
-							.replace(/\s/g, "-")
-							.replace(/\//g, "-")
-							.replace(/,/g, "") === params.slug
-				);
+				const mainAdsData = await adsData.filter((ads) => ads.favorite);
 
 				if (mainAdsData) {
 					setAllItems(mainAdsData);
 				} else {
 					setAllItems(undefined);
 				}
-
 			} catch (error) {
 				console.error("Error fetching data:", error);
 				setAllItems(undefined);
@@ -46,7 +39,7 @@ export default function Page({ params }: { params: { slug: string } }) {
 		};
 
 		fetchData();
-	}, [params.slug]);
+	}, []);
 
 	const itemsToShow = allItems ? allItems.slice(0, numItemsToShow) : [];
 	console.log(itemsToShow);

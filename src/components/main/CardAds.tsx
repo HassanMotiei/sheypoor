@@ -7,7 +7,7 @@ interface adsDataType {
 	id: string;
 	imgAds: string[];
 	imgLogo: string;
-	like: boolean;
+	favorite: boolean;
 	group: string;
 	title: string;
 	price: number;
@@ -40,19 +40,22 @@ const CardAds = (props: adsDataType) => {
 						.replace(/\//g, "-")
 						.replace(/,/g, "")}`}
 				>
-					<Image
-						src={props.imgAds[0]}
-						alt="sheypoor-ads"
-						width="210"
-						height="210"
-					/>
+					<div className="w-56 h-56 relative overflow-hidden">
+						<Image
+							src={props.imgAds[0]}
+							alt="sheypoor-ads"
+							layout="fill"
+							objectFit="cover"
+						/>
+					</div>
 				</Link>
 			</figure>
-			<div className="absolute left-2 top-2 rounded-full">
+			<div className="absolute left-2 top-2">
 				<Image
 					src={props.imgLogo}
-					width="30"
-					height="30"
+					width="40"
+					height="40"
+					className="rounded-lg"
 					alt="sheypoor-logo"
 				/>
 			</div>
@@ -63,18 +66,18 @@ const CardAds = (props: adsDataType) => {
 
 					{/* Heart on icon */}
 					<Heart
-						className={props.like ? "swap-on" : "swap-off"}
+						className={props.favorite ? "swap-on" : "swap-off"}
 						color="#ffffff"
 					/>
 					{/* Heart off icon */}
 					<Heart
-						className={props.like ? "swap-off" : "swap-on"}
+						className={props.favorite ? "swap-off" : "swap-on"}
 						fill="red"
 						color="#ffffff"
 					/>
 				</label>
 			</div>
-			<div className="absolute right-3 top-[10.5rem] rounded-full bg-neutral-content py-0.5 px-1.5 text-black	">
+			<div className="absolute right-3 top-48 rounded-full bg-neutral-content py-0.5 px-1.5 text-black	">
 				<p className="flex items-center gap-1">
 					<Images size={16} />
 					{props.imgAds.length}

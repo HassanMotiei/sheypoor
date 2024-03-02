@@ -1,21 +1,13 @@
 "use client";
 import React, { useState } from "react";
 
-import headerData from "@/app/headerData";
+import { Eraser } from "lucide-react";
 
-interface AdRegisterModalProps {
-	selectedSubData: string | null;
-	setSelectedSubData: React.Dispatch<React.SetStateAction<string | null>>;
-	colorWarningModal: string;
-	setColorWarningModal: React.Dispatch<React.SetStateAction<string>>;
+interface HeaderProps {
+	header: any[];
 }
 
-const AdRegisterModal: React.FC<AdRegisterModalProps> = ({
-	selectedSubData,
-	setSelectedSubData,
-	colorWarningModal,
-	setColorWarningModal,
-}) => {
+const AdRegisterModal: React.FC<HeaderProps> = ({ header }) => {
 	const [selectedData, setSelectedData] = useState<{
 		id: number;
 		name: string;
@@ -28,8 +20,13 @@ const AdRegisterModal: React.FC<AdRegisterModalProps> = ({
 	const [isShowModalSubList, setIsShowModalSubList] = useState(false);
 	const modalRef = React.useRef<HTMLDialogElement>(null);
 
-	const [inputValue, setInputValue] = useState("");
-	const [inputFocused, setInputFocused] = useState(false);
+	const [selectedSubData, setSelectedSubData] = useState<string | null>(null);
+	const [colorWarningModal, setColorWarningModal] = useState("indigo-700");
+
+	const EmptyCategory = () => {
+		setSelectedSubData(null);
+		setColorWarningModal("indigo-700");
+	};
 
 	const openModal = () => {
 		if (modalRef.current) {
@@ -94,12 +91,24 @@ const AdRegisterModal: React.FC<AdRegisterModalProps> = ({
 					<span className="label-text-alt text-indigo-700 text-xs">
 						Enter a suitable category for your ad
 					</span>
+					<button
+						className="btn btn-ghost text-xs btn-sm label-text-alt"
+						onClick={EmptyCategory}
+					>
+						<Eraser size={16} strokeWidth={2} color="#4338ca" />
+					</button>
 				</div>
 			) : (
 				<div className="label border-t-red-700 border-t pt-2">
 					<span className="label-text-alt text-red-700 text-xs">
 						Please complete this section
 					</span>
+					<button
+						className="btn btn-ghost text-xs btn-sm label-text-alt"
+						onClick={EmptyCategory}
+					>
+						<Eraser size={16} strokeWidth={2} color="#b91c1c" />
+					</button>
 				</div>
 			)}
 			<dialog ref={modalRef} className="modal">
@@ -120,10 +129,7 @@ const AdRegisterModal: React.FC<AdRegisterModalProps> = ({
 					</form>
 					<div className="flex flex-col max-h-96 overflow-y-auto border-t">
 						<label className="input input-bordered flex items-center gap-2 mt-5">
-							<input
-								type="text"
-								className="grow"
-							/>
+							<input type="text" className="grow" />
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								viewBox="0 0 16 16"
@@ -138,7 +144,7 @@ const AdRegisterModal: React.FC<AdRegisterModalProps> = ({
 							</svg>
 						</label>
 						{isShowModalList &&
-							headerData.map((data) => (
+							header.map((data) => (
 								<button
 									className="flex flex-col items-center gap-3"
 									key={data.id}

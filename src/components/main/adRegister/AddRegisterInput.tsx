@@ -1,27 +1,31 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { Eraser } from "lucide-react";
 
-interface AddRegisterInputProps {
-	inputValue: string;
-	setInputValue: React.Dispatch<React.SetStateAction<string>>;
-	showButton: boolean;
-	setShowButton: React.Dispatch<React.SetStateAction<boolean>>;
-	colorWarningInput: string;
-	setColorWarningInput: React.Dispatch<React.SetStateAction<string>>;
-	inputFocused: boolean;
-	setInputFocused: React.Dispatch<React.SetStateAction<boolean>>;
-}
+// interface AddRegisterInputProps {
+// 	inputValue: string;
+// 	setInputValue: React.Dispatch<React.SetStateAction<string>>;
+// 	showButton: boolean;
+// 	setShowButton: React.Dispatch<React.SetStateAction<boolean>>;
+// 	colorWarningInput: string;
+// 	setColorWarningInput: React.Dispatch<React.SetStateAction<string>>;
+// 	inputFocused: boolean;
+// 	setInputFocused: React.Dispatch<React.SetStateAction<boolean>>;
+// }
 
-const AddRegisterInput: React.FC<AddRegisterInputProps> = ({
-	inputValue,
-	setInputValue,
-	showButton,
-	setShowButton,
-	colorWarningInput,
-	setColorWarningInput,
-	inputFocused,
-	setInputFocused,
-}) => {
+const AddRegisterInput: React.FC = ({}) => {
+	const [inputValue, setInputValue] = useState("");
+	const [showButton, setShowButton] = useState(true);
+	const [colorWarningInput, setColorWarningInput] = useState("indigo-700");
+	const [inputFocused, setInputFocused] = useState(false);
+
+	const EmptyCategory = () => {
+		setInputValue("");
+		setShowButton(true);
+		setColorWarningInput("indigo-700");
+		setInputFocused(false);
+	};
+
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	const handleBlur = () => {
@@ -85,12 +89,24 @@ const AddRegisterInput: React.FC<AddRegisterInputProps> = ({
 						<span className="label-text-alt text-indigo-700 text-xs">
 							Enter a suitable title for your ad
 						</span>
+						<button
+							className="btn btn-ghost text-xs btn-sm label-text-alt"
+							onClick={EmptyCategory}
+						>
+							<Eraser size={16} strokeWidth={2} color="#4338ca" />
+						</button>
 					</div>
 				) : (
 					<div className="label border-t-red-700 border-t pt-2">
 						<span className="label-text-alt text-red-700 text-xs">
 							Please complete this section
 						</span>
+						<button
+							className="btn btn-ghost text-xs btn-sm label-text-alt"
+							onClick={EmptyCategory}
+						>
+							<Eraser size={16} strokeWidth={2} color="#b91c1c" />
+						</button>
 					</div>
 				)}
 			</label>

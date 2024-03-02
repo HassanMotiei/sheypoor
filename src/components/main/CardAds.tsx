@@ -4,9 +4,9 @@ import _ from "lodash";
 import Image from "next/image";
 
 interface adsDataType {
-	id: string;
-	imgAds: string[];
+	id: number;
 	imgLogo: string;
+	imgAds: string[];
 	favorite: boolean;
 	group: string;
 	title: string;

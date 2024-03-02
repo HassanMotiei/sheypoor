@@ -2,18 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Eraser } from "lucide-react";
 
-// interface AddRegisterInputProps {
-// 	inputValue: string;
-// 	setInputValue: React.Dispatch<React.SetStateAction<string>>;
-// 	showButton: boolean;
-// 	setShowButton: React.Dispatch<React.SetStateAction<boolean>>;
-// 	colorWarningInput: string;
-// 	setColorWarningInput: React.Dispatch<React.SetStateAction<string>>;
-// 	inputFocused: boolean;
-// 	setInputFocused: React.Dispatch<React.SetStateAction<boolean>>;
-// }
-
-const AddRegisterInput: React.FC = ({}) => {
+const AddRegisterInput: React.FC = () => {
 	const [inputValue, setInputValue] = useState("");
 	const [showButton, setShowButton] = useState(true);
 	const [colorWarningInput, setColorWarningInput] = useState("indigo-700");

@@ -1,13 +1,35 @@
-import adsData from "@/app/adsData";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
+
 import Breadcrumbs from "@/components/main/Breadcrumbs";
 import SwiperCarousel from "@/components/main/SwiperCarousel";
 import { DollarSign } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+const getAds = async () => {
+	const res = await prisma.ads.findMany({
+		select: {
+			id: true,
+			imgLogo: true,
+			imgAds: true,
+			favorite: true,
+			group: true,
+			title: true,
+			price: true,
+			city: true,
+			time: true,
+		},
+	});
+	return res;
+};
+
 export default async function Page({ params }: { params: { slug: string } }) {
+	const [adsData] = await Promise.all([getAds()]);
+
 	let mainAdsData = await adsData.find(
 		(ads) =>
+			ads.title &&
 			ads.title
 				.replace(/\s/g, "-")
 				.replace(/\//g, "-")

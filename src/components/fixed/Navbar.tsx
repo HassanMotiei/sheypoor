@@ -5,7 +5,6 @@ import { signOut, useSession } from "next-auth/react";
 
 import { FaHeart } from "react-icons/fa";
 import { AiFillMessage } from "react-icons/ai";
-import { FaUser } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
 import Link from "next/link";
 import Image from "next/image";

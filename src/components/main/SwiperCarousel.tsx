@@ -11,14 +11,15 @@ import CardImageAds from "./CardImageAds";
 import { Images } from "lucide-react";
 
 interface adsDataType {
-	id: string;
+	id: number;
+	imgLogo: string
 	imgAds: string[];
-	imgLogo: string;
-	favorite: boolean;
-	title: string;
-	price: number;
-	city: string;
-	time: string;
+	favorite: boolean
+	group: string
+	title: string
+	price: number
+	city: string
+	time: string
 }
 
 export default function SwiperCarousel(mainAdsData: adsDataType) {

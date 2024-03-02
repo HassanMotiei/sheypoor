@@ -2,12 +2,7 @@
 import { Camera, Eraser, Plus } from "lucide-react";
 import React, { ChangeEvent, useState } from "react";
 
-// interface ImageUploaderProps {
-// 	images: string[];
-// 	setImages: React.Dispatch<React.SetStateAction<string[]>>;
-// }
-
-const ImageUploader: React.FC = ({}) => {
+const ImageUploader: React.FC = () => {
 	const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const files = e.target?.files;
 		if (files && files.length > 0) {
